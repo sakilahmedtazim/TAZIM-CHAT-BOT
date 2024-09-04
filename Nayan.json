@@ -8,17 +8,17 @@
   "approval": false,
   "saveState": true,
   "BOTNAME": "nayan-bot",
-  "PREFIX": "/",
+  "PREFIX": "!",
   "OPERATOR": [
-    "100014896964436",
-    "100000959749712"
+    "100074841336862",
+    "100089705594318"
   ],
   "ADMINBOT": [
-    "100000959749712",
+    "100074841336862",
     ""
   ],
   "OWNER": ["100000959749712"], 
-  "APPROVED": [],
+  "APPROVED": ["100074841336862"],
   "disabledcmds": [],
   "disabledevents": [],
   "note": "make sure that the bot name you entered is all lowercase",
