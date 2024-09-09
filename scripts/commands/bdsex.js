@@ -1,15 +1,18 @@
 module.exports.config = {
-  name: "sex",
+  name: "bdsex",
   version: "1.0.0",
-  permission: 2,
-  credits: "Nayan",
-  description: "Sex pic",
-  prefix: true, 
-  category: "user", 
-  usages: "sex",
+  hasPermssion: 0,
+  credits: "HungCho",
+  description: "Random ảnh girl",
+  commandCategory: "nsfw",
+  usages: "bdsex",
   cooldowns: 5,
   dependencies: {
-	}
+    "request":"",
+    "fs-extra":"",
+    "axios":""
+  }
+    
 };
 
 module.exports.run = async({api,event,args,Users,Threads,Currencies}) => {
@@ -237,6 +240,6 @@ const fs = global.nodemodule["fs-extra"];
 
 "https://i.postimg.cc/fR6KgQHC/big-boobs-of-sexy-Pakistani-girl-exposed.jpg",
     ];
-   var callback = () => api.sendMessage({body:`লুচ্ছা বেডা😋+\nSố ảnh: ${link.length}`,attachment: fs.createReadStream(__dirname + "/cache/1.jpg")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/1.jpg"));  
+   var callback = () => api.sendMessage({body:` পতিতার ভারা ঘন্টায় ৫০০😋+\nSố ảnh: ${link.length}`,attachment: fs.createReadStream(__dirname + "/cache/1.jpg")}, event.threadID, () => fs.unlinkSync(__dirname + "/cache/1.jpg"));  
       return request(encodeURI(link[Math.floor(Math.random() * link.length)])).pipe(fs.createWriteStream(__dirname+"/cache/1.jpg")).on("close",() => callback());
    };

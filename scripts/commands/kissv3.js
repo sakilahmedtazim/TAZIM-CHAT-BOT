@@ -1,11 +1,11 @@
 module.exports.config = {
-    name: "love",
-    version: "2.6.0",
+    name: "kissv3",
+    version: "7.3.1",
     hasPermssion: 0,
-    credits: "JRT",
-    description: "",
-    commandCategory: "Love",
-    usages: "[tag]",
+    credits: "John Lester",
+    description: "kiss",
+    commandCategory: "img",
+    usages: "[@mention]",
     cooldowns: 5,
     dependencies: {
         "axios": "",
@@ -20,9 +20,9 @@ module.exports.onLoad = async() => {
     const { existsSync, mkdirSync } = global.nodemodule["fs-extra"];
     const { downloadFile } = global.utils;
     const dirMaterial = __dirname + `/cache/canvas/`;
-    const path = resolve(__dirname, 'cache/canvas', 'love.jpg');
+    const path = resolve(__dirname, 'cache/canvas', 'kissv3.png');
     if (!existsSync(dirMaterial + "canvas")) mkdirSync(dirMaterial, { recursive: true });
-    if (!existsSync(path)) await downloadFile("https://i.imgur.com/zwBuMaE.jpg", path);
+    if (!existsSync(path)) await downloadFile("https://i.imgur.com/3laJwc1.jpg", path);
 }
 
 async function makeImage({ one, two }) {
@@ -32,8 +32,8 @@ async function makeImage({ one, two }) {
     const jimp = global.nodemodule["jimp"];
     const __root = path.resolve(__dirname, "cache", "canvas");
 
-    let tromcho_img = await jimp.read(__root + "/love.jpg");
-    let pathImg = __root + `/love_${one}_${two}.png`;
+    let batgiam_img = await jimp.read(__root + "/kissv3.png");
+    let pathImg = __root + `/batman${one}_${two}.png`;
     let avatarOne = __root + `/avt_${one}.png`;
     let avatarTwo = __root + `/avt_${two}.png`;
     
@@ -45,9 +45,9 @@ async function makeImage({ one, two }) {
     
     let circleOne = await jimp.read(await circle(avatarOne));
     let circleTwo = await jimp.read(await circle(avatarTwo));
-    tromcho_img.composite(circleOne.resize(90, 70), 215, 177).composite(circleTwo.resize(93, 70), 76, 178);
+    batgiam_img.composite(circleOne.resize(350, 350), 200, 300).composite(circleTwo.resize(350, 350), 600, 80);
     
-    let raw = await tromcho_img.getBufferAsync("image/png");
+    let raw = await batgiam_img.getBufferAsync("image/png");
     
     fs.writeFileSync(pathImg, raw);
     fs.unlinkSync(avatarOne);
@@ -62,19 +62,13 @@ async function circle(image) {
     return await image.getBufferAsync("image/png");
 }
 
-module.exports.run = async function ({ event, api, args }) {
+module.exports.run = async function ({ event, api, args }) {    
     const fs = global.nodemodule["fs-extra"];
     const { threadID, messageID, senderID } = event;
-    var mention = Object.keys(event.mentions)[0]
-    let tag = event.mentions[mention].replace("@", "");
-    if (!mention) return api.sendMessage("Please tag 1 person", threadID, messageID);
+    const mention = Object.keys(event.mentions);
+    if (!mention[0]) return api.sendMessage("Please mention 1 person.", threadID, messageID);
     else {
-        var one = senderID, two = mention;
-        return makeImage({ one, two }).then(path => api.sendMessage({ body: "This "  +  tag + ' love you so much💔',
-            mentions: [{
-          tag: tag,
-          id: mention
-        }],
-     attachment: fs.createReadStream(path) }, threadID, () => fs.unlinkSync(path), messageID));
+        const one = senderID, two = mention[0];
+        return makeImage({ one, two }).then(path => api.sendMessage({ body: "", attachment: fs.createReadStream(path) }, threadID, () => fs.unlinkSync(path), messageID));
     }
-}
+      }

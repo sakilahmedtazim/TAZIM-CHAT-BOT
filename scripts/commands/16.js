@@ -1,10 +1,10 @@
-module.exports.config = {
-    name: "love",
-    version: "2.6.0",
+﻿module.exports.config = {
+    name: "couple",
+    version: "2.0.0",
     hasPermssion: 0,
-    credits: "JRT",
-    description: "",
-    commandCategory: "Love",
+    credits: "Thiệu Trung Kiên",
+    description: "Seo phi",
+    commandCategory: "Tình Yêu",
     usages: "[tag]",
     cooldowns: 5,
     dependencies: {
@@ -20,9 +20,9 @@ module.exports.onLoad = async() => {
     const { existsSync, mkdirSync } = global.nodemodule["fs-extra"];
     const { downloadFile } = global.utils;
     const dirMaterial = __dirname + `/cache/canvas/`;
-    const path = resolve(__dirname, 'cache/canvas', 'love.jpg');
+    const path = resolve(__dirname, 'cache/canvas', 'seophi.png');
     if (!existsSync(dirMaterial + "canvas")) mkdirSync(dirMaterial, { recursive: true });
-    if (!existsSync(path)) await downloadFile("https://i.imgur.com/zwBuMaE.jpg", path);
+    if (!existsSync(path)) await downloadFile("https://i.imgur.com/hmKmmam.jpg", path);
 }
 
 async function makeImage({ one, two }) {
@@ -32,8 +32,8 @@ async function makeImage({ one, two }) {
     const jimp = global.nodemodule["jimp"];
     const __root = path.resolve(__dirname, "cache", "canvas");
 
-    let tromcho_img = await jimp.read(__root + "/love.jpg");
-    let pathImg = __root + `/love_${one}_${two}.png`;
+    let batgiam_img = await jimp.read(__root + "/seophi.png");
+    let pathImg = __root + `/batman${one}_${two}.png`;
     let avatarOne = __root + `/avt_${one}.png`;
     let avatarTwo = __root + `/avt_${two}.png`;
     
@@ -45,9 +45,9 @@ async function makeImage({ one, two }) {
     
     let circleOne = await jimp.read(await circle(avatarOne));
     let circleTwo = await jimp.read(await circle(avatarTwo));
-    tromcho_img.composite(circleOne.resize(90, 70), 215, 177).composite(circleTwo.resize(93, 70), 76, 178);
+    batgiam_img.resize(1024, 712).composite(circleOne.resize(200, 200), 527, 141).composite(circleTwo.resize(200, 200), 389, 407);
     
-    let raw = await tromcho_img.getBufferAsync("image/png");
+    let raw = await batgiam_img.getBufferAsync("image/png");
     
     fs.writeFileSync(pathImg, raw);
     fs.unlinkSync(avatarOne);
@@ -67,10 +67,10 @@ module.exports.run = async function ({ event, api, args }) {
     const { threadID, messageID, senderID } = event;
     var mention = Object.keys(event.mentions)[0]
     let tag = event.mentions[mention].replace("@", "");
-    if (!mention) return api.sendMessage("Please tag 1 person", threadID, messageID);
+    if (!mention) return api.sendMessage("Vui lòng tag 1 người", threadID, messageID);
     else {
         var one = senderID, two = mention;
-        return makeImage({ one, two }).then(path => api.sendMessage({ body: "This "  +  tag + ' love you so much💔',
+        return makeImage({ one, two }).then(path => api.sendMessage({ body: "Ship ",
             mentions: [{
           tag: tag,
           id: mention
