@@ -1,5 +1,5 @@
 module.exports.config = {
-  name: "fuckv2",
+  name: "fuck",
   version: "3.1.1",
   permssion: 0,
   prefix: true,
