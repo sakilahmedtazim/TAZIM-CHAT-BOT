@@ -4,7 +4,7 @@
  * @apikey Reg key tại: https://meewmeew.info/site
  */
 module.exports.config = {
-    name: "bot",
+    name: "Jan",
     version: "4.3.7",
     hasPermssion: 0,
     credits: "TANVIR TAMIM", //change api sim Hoang Giap
